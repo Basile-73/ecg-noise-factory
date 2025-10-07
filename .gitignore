@@ -1,0 +1,10 @@
+# Ignore data artifacts
+data/
+
+# Common build artifacts
+dist/
+*.egg-info/
+__pycache__/
+.DS_Store
+.ipynb_checkpoints/
+
