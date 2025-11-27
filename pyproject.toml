@@ -17,7 +17,7 @@ build-backend = "hatchling.build"   # The build-backend key is the name of the P
 [project]
 name = "ecg_noise_factory"                        # name is the distribution name of your package.
                                                         # It also must not already be taken on PyPI.
-version = "0.0.2"
+version = "0.0.3"
 authors = [
   { name="Basile Morel", email="bamorel@student.ethz.ch" },        # You can also list maintainers in the same format.
 ]

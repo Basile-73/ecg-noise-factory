@@ -1,0 +1,43 @@
+# Synthetic noise configuration combining traditional and new noise types
+# for comprehensive ECG signal augmentation testing
+#
+# DISABLING NOISE TYPES:
+# - For SNR-based noises (bw, ma, em, AWGN): set value to null to disable
+# - For synthetic noises (sine_noise, spike_noise, trunc_noise): set include to false to disable
+
+# Traditional SNR-based noise types
+# SNR values from Hu et al. 2023 (acceptable range: 0-30 dB)
+SNR:
+  bw: null # 0 - 5 or null to disable
+  ma: null # 5 - 10 or null to disable
+  em: null # 10 - 15 or null to disable
+  AWGN: null # 20 - 25 or null to disable
+
+# Multi-frequency interference simulation
+# Simulates complex interference patterns from baseline wander and powerline noise
+sine_noise:
+  include: false # set to false to disable
+  snr: 0 # Moderate noise level (dB)
+  min_freq: 0.01 # Minimum frequency (Hz) - low-frequency baseline wander
+  max_freq: 0.03 # Maximum frequency (Hz)
+  number_of_frequencies: 3 # Number of sine waves to sum for complex patterns
+
+# Electrode contact artifacts and impulse noise simulation
+# Simulates brief spikes from poor electrode contact or external impulses
+spike_noise:
+  include: false # set to false to disable
+  amplitude: 2 # Spike amplitude relative to normalized ECG
+  spike_duration: 1 # Duration in samples (~50ms@100Hz, ~14ms@360Hz, ~10ms@500Hz)
+  min_number_of_spikes: 1 # Minimum number of spikes per signal
+  max_number_of_spikes: 5 # Maximum number of spikes per signal
+
+# Signal dropout and sensor disconnection simulation
+# Simulates temporary signal loss from sensor disconnection or data transmission errors
+trunc_noise:
+  include: true # set to false to disable
+  min_length: 50 # Minimum dropout duration in samples (~0.5s@100Hz, ~0.14s@360Hz, ~0.1s@500Hz)
+  max_length: 200 # Maximum dropout duration in samples (~2s@100Hz, ~0.56s@360Hz, ~0.4s@500Hz)
+
+# Example: To disable spike_noise entirely, use:
+# spike_noise:
+#   include: false  # Disabled
